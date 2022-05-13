@@ -1,0 +1,13 @@
+authorized_keys?????
+cp -f /home/tmcit/.ssh/authorized_keys keys/
+chmod 777 auth.sh
+chmod 777 keys.service
+
+
+
+??????????
+./config path
+
+
+
+

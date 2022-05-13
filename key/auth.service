@@ -1,0 +1,19 @@
+[Unit]
+Description=keys copy scripts
+
+[Service]
+Type=simple
+User=root
+Group=root
+TimeoutStartSec=0
+Restart=always
+
+#########
+ExecStart=chikan
+auth.sh
+#########
+
+SyslogIdentifier=Diskutilization
+
+[Install]
+WantedBy=multi-user.target
