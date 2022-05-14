@@ -2,7 +2,10 @@ version: '3'
 
 services:
   db:
-    image: mysql:5.7
+    restart: always
+    build:
+      context: ./
+      dockerfile: ./db/Dockerfile
     container_name: mysql
     environment:
       MYSQL_ROOT_PASSWORD: tmcit
@@ -10,25 +13,29 @@ services:
       MYSQL_USER: docker
       MYSQL_PASSWORD: docker
       TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci 
     volumes:
     - ./db/data:/var/lib/mysql
     - ./log/mysql:/var/log/mysql
     - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
-    - ./initdb.d:/docker-entrypoint-initdb.d
-   
+    - ./initdb.d/:/docker-entrypoint-initdb.d
+    command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci   
     ports:
-    - 3306:3306
+      - 3306:3306
+  
     networks:
       python_network:
         ipv4_address: 192.168.2.2              
 
+
   python3:
     restart: always
     build:
-      context: ./python
+      context: ./
+      dockerfile: ./python/Dockerfile      
     container_name: "python3"
     working_dir: "/root/src"
+    ports:
+      - 8080:80
     tty: true
     volumes:
       - ./python:/root/src
