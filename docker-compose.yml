@@ -44,6 +44,15 @@ services:
     networks:
       - python_network
 
+  nginx:
+    image: nginx:latest
+    container_name: nginx                        
+    ports:
+      - "80:80"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+
+
 networks: 
   python_network:
     driver: bridge

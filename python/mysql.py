@@ -18,26 +18,36 @@ connection.close()
 
 
 while True:
+    pop = 1
     cursor = connection.cursor()
     for na in iplist:
-        url = na
+        url = "http://" + str(na) + ":80"
         try:
             print(url)
             res = requests.get(url)
             res = str(res)
-            if res == "200":
+            print(res)
+
+            if res == "<Response [200]>":
                 print("ポイント追加")
-                mozi = "SELECT * FROM score WHERE id =" + str(teamnum) + ";"
+                mozi = "SELECT score FROM score WHERE id =" + str(pop) + ";"
                 cursor.execute(mozi)
                 rows = cursor.fetchall()
+                rows = str(rows)
+                rows = (rows.replace('(', ''))
+                rows = (rows.replace(')', ''))
+                rows = (rows.replace(',', ''))
+                rows = int(rows)
                 rows = int(rows) + 10
                 print(rows)
-                mozi = "INSERT INTO score(rows) VALUES (" + str(rows) + ");"
+                mozi = "update score set score=" + str(rows) + " where id =" + str(pop) + ";"
                 cursor.execute(mozi)
+                connection.commit()
             else:
                 print("bad request")
         except:
             print("no response")
-        time.sleep(2)
+        pop = pop + 1
+        time.sleep(1)
 
 # ポイント閲覧
