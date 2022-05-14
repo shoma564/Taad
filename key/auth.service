@@ -10,7 +10,6 @@ Restart=always
 
 #########
 ExecStart=chikan
-auth.sh
 #########
 
 SyslogIdentifier=Diskutilization
