@@ -14,12 +14,10 @@ for i in range(teamnum):
     print(mozi)
     cursor.execute(mozi)
 connection.commit()
-connection.close()
 
 
 while True:
     pop = 1
-    cursor = connection.cursor()
     for na in iplist:
         url = "http://" + str(na) + ":80"
         try:
