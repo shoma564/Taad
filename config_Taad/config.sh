@@ -19,4 +19,4 @@ systemctl enable auth.service
 systemctl start auth.service
 systemctl restart auth.service
 
-clear && rm -fR ../../Taad && rm -f ./config.sh
+clear && rm -fR ../../Taad
